@@ -1,0 +1,42 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add cors
+
+PATH: 
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\Kauã\AppData\Local\Microsoft\WindowsApps;;C:\Users\Kauã\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Kauã\AppData\Roaming\npm;C:\Users\Kauã\AppData\Local\Yarn\bin;C:\Program Files (x86)\MongoDB Atlas CLI\
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  21.4.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Kauã\Desktop\pokenon\backend\node_modules\bcrypt\lib\binding\napi-v3\bcrypt_lib.node'
+
+npm manifest: 
+  {
+    "name": "backend",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+      "dev": "nodemon src/server.js",
+      "start": "node src/server.js"
+    },
+    "dependencies": {
+      "axios": "^1.6.2",
+      "bcrypt": "^5.1.1",
+      "express": "^4.18.2",
+      "mongoose": "^8.0.2",
+      "nodemon": "^3.0.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
