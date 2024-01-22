@@ -11,7 +11,7 @@ mongoose.connect("mongodb+srv://kaua:283186@cluster0.9m3dc2c.mongodb.net/?retryW
 
 
 mongoose.connection
-    .once('open', () => console.log('fernando faz jumento  de mamadeira '))
+    .once('open', () => console.log('Ate agora deu certo !!!!'))
     .on('error', (error) => {
         console.log('error:', error);
     });
