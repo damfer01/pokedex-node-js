@@ -1,36 +1,33 @@
-const pokemonService = require('../services/pokemonServices');
+const PokemonService = require('../services/pokemonService');
 
 module.exports = {
-    async index(req, res) {
-        try {
-            const {
-                page,
-                perPage
-              } = req.query
-            const response = await pokemonService.index(page , perPage);
+  async index( req, res ) {
+    try {
+      const {
+        page,
+        perPage,
+      } = req.query;
 
-            return res.json(response);
+      const response = await PokemonService.index(page, perPage);
 
-        } catch (error) {
-            console.log(error);
-            return res.json({ success: false, message: 'erro de buscar pokemon' })
-        }
+      return res.json( response );
+    } catch ( err ) {
+      return res.json({ success: false, message: 'Failed to retrieve pokemon'});
+    }
+  },
 
-    },
+  async show( req, res ) {
+    try {
+      const {
+        id,
+      } = req.params;
 
-    async show(req, res) {
-        try {
-            const {
-                id,
-            } = req.params
+      const response = await PokemonService.show(id);
 
-            const response = await pokemonService.show(id);
-
-            return res.json(response);
-        } catch (error) {
-            console.log(error);
-            return res.json({ success: false, message: 'erro de buscar pokemon' })
-        }
-    },
-
+      return res.json( response );
+    } catch ( err ) {
+      console.log(err);
+      return res.json({ success: false, message: 'Failed to retrieve pokemon'});
+    }
+  },
 };

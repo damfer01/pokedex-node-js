@@ -1,57 +1,63 @@
 const bcrypt = require('bcrypt');
 
 const User = require('../models/UserModel');
+const authService = require('./authService');
 
 module.exports = {
-    async create(name, username, password) {
-        const hash = await bcrypt.hash(password, 10);
-        await User.create({
-            name,
-            username,
-            password: hash,
-        });
+  async create(name, username, password) {
+    const user = await User.findOne({username});
 
-        return { success: true, message: 'sucesso' };
-    },
+    if(!!user) return { success: false, message: 'already registered user'};
 
-    async index() {
-        const users = await User.find();
+    const hash = await bcrypt.hash(password, 10);
 
-        return {
-            success: true,
-            message: ' recovered',
-            result: users,
-        };
-    },
+    await User.create({
+      name,
+      username,
+      password: hash,
+    });
 
-    async show(id) {
-        const user = await User.findById(id);
+    const { result } = await authService.create(username, password);
 
-        return {
-            success: true,
-            message: ' user recovered success',
-            result: user,
-        };
-    },
+    return {
+      success: true,
+      message: 'user successfully created',
+      result,
+    };
+  },
 
-    async update(id, name, username,) {
-        await User.findByIdAndUpdate(id ,{
-            name,
-            username,
- 
-        });
+  async index() {
+    const users = await User.find();
 
-        return { success: true, message: 'sucesso' };
+    return {
+      success: true,
+      message: 'Users successfully recovered',
+      result: users,
+    };
+  },
 
+  async show(id) {
+    const user = await User.findById(id);
 
-    },
+    return {
+      success: true,
+      message: 'User recovered successfully',
+      result: user,
+    };
+  },
 
-    async delete(id) {
-        await User.findByIdAndDelete(id);
+  async update(id, name, username) {
+    await User.findByIdAndUpdate(id, {
+      name,
+      username,
+    });
 
-        return {
-            success: true,
-            message: ' deleted'
-        }
-    },
+    return { success: true, message: 'User changed successfully'};
+  },
+
+  async delete(id) {
+    await User.findByIdAndDelete(id);
+
+    return { success: true, message: 'User deleted successfully'};
+  },
 };
